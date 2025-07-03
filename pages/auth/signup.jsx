@@ -38,6 +38,7 @@ export default function Signup() {
         },
       });
       const result = await response.json();
+      alert(result.message);
 
       if (result.status === 'success') {
         setToken(result.data);

@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
   try {
     const findUser = await User.findOne({ phone: phone });
-    if (findUser) return res.status(400).json({ status: 'failed', message: 'کاربری با این مشخصات از قبل وجود دارد' });
+    if (findUser) return res.status(400).json({ status: 'failed', message: 'کاربری با این شماره تماس از قبل وجود دارد' });
 
     const response = await User.create({ name, phone, password });
     const token = sign({ phone }, process.env.SECRET_KEY);
