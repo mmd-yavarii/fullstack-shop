@@ -4,15 +4,16 @@
   --background-color: #fff;
   --test-primery-color: #2d2d2d;
   --them-primery-color: #ff005d;
-
-  font-family: 'Vazirmatn';
-  font-weight: 100;
+  --them-secondary-color: #ff005d47;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  border: none;
+  outline: none;
+  font-family: 'Vazirmatn';
 }
 
 body {
@@ -24,4 +25,17 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+@media (min-width: 500px) {
+  a,
+  button {
+    cursor: pointer;
+  }
+}
+@media (max-width: 500px) {
+  a,
+  button {
+    cursor: default;
+  }
 }

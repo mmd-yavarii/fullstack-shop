@@ -1,0 +1,50 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 150px auto;
+}
+
+.title {
+  opacity: 0.8;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.form div {
+  display: flex;
+  align-items: center;
+  background-color: #efefef;
+  border: 1px solid #e1e1e1;
+  width: 100%;
+  border-radius: 10px;
+}
+.form input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 10px;
+  flex: 1;
+}
+.form div > button {
+  background-color: transparent;
+  padding: 10px;
+}
+
+.submitBtn {
+  background-color: var(--them-primery-color);
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  color: #fff;
+  font-weight: 900;
+}
+
+.form a {
+  margin-top: 10px;
+  font-weight: 300;
+}
