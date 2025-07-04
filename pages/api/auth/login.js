@@ -9,16 +9,16 @@ export default async function handler(req, res) {
 
   const { phone, password } = req.body;
 
-  if (!phone || !password) return res.status(400).json({ status: 'failed', message: 'اطلاعات به درستی وارد نشده است' });
+  if (!phone || !password) return res.status(400).json({ status: 'error', message: 'اطلاعات به درستی وارد نشده است' });
 
   try {
     const findUser = await User.findOne({ phone: phone });
-    if (!findUser || findUser.password !== password) return res.status(404).json({ status: 'failed', message: 'کاربری با این مشخصات یافت نشد' });
+    if (!findUser || findUser.password !== password) return res.status(404).json({ status: 'error', message: 'کاربری با این مشخصات یافت نشد' });
 
     const token = sign({ phone: findUser.phone }, process.env.SECRET_KEY);
     res.status(201).json({ status: 'success', message: 'ورود با موفقیت انجام شد', data: token });
   } catch (error) {
     console.log(`\n❌${error}\n`);
-    return res.status(500).json({ status: 'failed', message: 'خطلا در برقراری ارتباط' });
+    return res.status(500).json({ status: 'error', message: 'خطلا در برقراری ارتباط' });
   }
 }

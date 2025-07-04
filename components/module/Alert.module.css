@@ -1,0 +1,74 @@
+.container,
+.closeContainer {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  position: fixed;
+  right: 10;
+  background-color: dodgerblue;
+  background-color: #f95959;
+  min-width: 200px;
+  border-radius: 10px;
+  top: 10px;
+  box-shadow: 1px 2px 3px #00000031;
+  color: #ffff;
+  animation: alert 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+.closeContainer {
+  display: none;
+}
+
+.container div,
+.closeContainer div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container button,
+.closeContainer button {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  color: #fff;
+}
+
+.error {
+  background-color: #f95959;
+}
+
+.success {
+  background-color: #30b76f;
+}
+
+.closeContainer {
+  animation: alertback 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes alert {
+  0% {
+    top: -10px;
+    opacity: 0;
+  }
+}
+
+@keyframes alertback {
+  0% {
+    display: flex;
+  }
+  100% {
+    top: -10px;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .closeContainer,
+  .container {
+    right: 15px;
+  }
+}

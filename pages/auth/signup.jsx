@@ -1,9 +1,11 @@
+import { useAlert } from '@/contexts/AlertProvider';
 import { useToken } from '@/contexts/TokenProvider';
 import Form from '@/template/Form';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export default function Signup() {
+  const showAlert = useAlert();
   const router = useRouter();
   const [token, setToken] = useToken();
 
@@ -24,7 +26,8 @@ export default function Signup() {
   // sign up handler
   async function signupHandler() {
     if (!form.name.length || !form.phone.length || !form.password.length || !form.repassword.length || form.password != form.repassword) {
-      alert('کلمه عبور مطابقت ندارد');
+      showAlert('error', 'کلمه عبور مطابقت ندارد');
+
       return;
     }
 
@@ -38,7 +41,7 @@ export default function Signup() {
         },
       });
       const result = await response.json();
-      alert(result.message);
+      showAlert(result.status, result.message);
 
       if (result.status === 'success') {
         setToken(result.data);
