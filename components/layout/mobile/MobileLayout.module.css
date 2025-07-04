@@ -1,0 +1,32 @@
+.footer {
+  background-color: var(--background-color);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: -5px -2px 6px #00000018;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 70px;
+}
+.links p {
+  opacity: 0.4;
+  font-size: 0.8rem;
+}
+
+.selected {
+  color: var(--them-primery-color);
+}
+
+.selected p {
+  opacity: 1;
+}

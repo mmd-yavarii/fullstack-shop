@@ -1,9 +1,11 @@
+import { useAlert } from '@/contexts/AlertProvider';
 import { useToken } from '@/contexts/TokenProvider';
 import Form from '@/template/Form';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export default function Signup() {
+  const showAlert = useAlert();
   const router = useRouter();
   const [token, setToken] = useToken();
 
@@ -22,7 +24,7 @@ export default function Signup() {
   // login handler
   async function loginHandler() {
     if (!form.phone.length || !form.password.length) {
-      alert('اطلاعات وارد شده کامل نیست');
+      showAlert('error', 'اطلاعات وارد شده کامل نیست');
       return;
     }
 
@@ -36,7 +38,7 @@ export default function Signup() {
         },
       });
       const result = await response.json();
-      alert(result.message);
+      showAlert(result.status, result.message);
 
       if (result.status === 'success') {
         setToken(result.data);

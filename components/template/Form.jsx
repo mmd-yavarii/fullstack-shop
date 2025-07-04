@@ -1,19 +1,33 @@
 import { useState } from 'react';
+
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { BeatLoader } from 'react-spinners';
 
-import styles from './Form.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+
+import styles from './Form.module.css';
+
+import { phoneRegex, passwordRegex } from '@/helper/regexes';
 
 function Form({ state, setState, handler, loading }) {
   const router = useRouter();
   const [showPass, setShowPass] = useState(false);
   const [showPass2, setShowPass2] = useState(false);
 
+  // change inputs handler
   function changeHandler(name, value) {
     setState((form) => ({ ...form, [name]: value }));
+  }
+
+  // submit handler
+  async function submitHandler() {
+    if (phoneRegex.test(state.phone) && passwordRegex.test(state.password)) {
+      await handler();
+    } else {
+      alert('اینپوت ها را با دقت پر کنید');
+    }
   }
 
   return (
@@ -32,7 +46,7 @@ function Form({ state, setState, handler, loading }) {
             </div>
           )}
 
-          <div>
+          <div className={!phoneRegex.test(state.phone) ? styles.invalid : null}>
             <input
               type="text"
               placeholder="شماره تلفن"
@@ -42,7 +56,7 @@ function Form({ state, setState, handler, loading }) {
             />
           </div>
 
-          <div>
+          <div className={!passwordRegex.test(state.password) ? styles.invalid : null}>
             <input
               type={showPass ? 'text' : 'password'}
               placeholder="رمز عبور"
@@ -68,7 +82,7 @@ function Form({ state, setState, handler, loading }) {
             </div>
           )}
 
-          <button className={styles.submitBtn} onClick={handler}>
+          <button className={styles.submitBtn} onClick={submitHandler}>
             {loading ? <BeatLoader size="8" color="#fff" /> : <span>{router.asPath == '/auth/signup' ? 'ثبت نام' : 'ورود'}</span>}
           </button>
 

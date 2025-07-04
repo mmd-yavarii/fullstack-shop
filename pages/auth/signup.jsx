@@ -25,7 +25,10 @@ export default function Signup() {
 
   // sign up handler
   async function signupHandler() {
-    if (!form.name.length || !form.phone.length || !form.password.length || !form.repassword.length || form.password != form.repassword) {
+    if (!form.name.length || !form.phone.length || !form.password.length || !form.repassword.length) {
+      showAlert('error', 'اطلاعات به درستی وارد نشده');
+    }
+    if (form.password != form.repassword) {
       showAlert('error', 'کلمه عبور مطابقت ندارد');
 
       return;
