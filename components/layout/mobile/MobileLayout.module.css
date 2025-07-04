@@ -30,3 +30,9 @@
 .selected p {
   opacity: 1;
 }
+
+@media (min-width: 800px) {
+  .footer {
+    display: none;
+  }
+}

@@ -1,13 +1,12 @@
-import { useRouter } from 'next/router';
 import MobileLayout from './mobile/MobileLayout';
+import DesktopLayout from './desktop/DesktopLayout';
 
 function Layout({ children }) {
-  const { asPath: path } = useRouter();
-
   return (
     <>
+      <DesktopLayout />
       {children}
-      {<MobileLayout />}
+      <MobileLayout />
     </>
   );
 }
