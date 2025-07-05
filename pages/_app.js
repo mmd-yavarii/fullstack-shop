@@ -5,12 +5,12 @@ import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }) {
   return (
-    <Layout>
+    <TokenProvider>
       <AlertProvider>
-        <TokenProvider>
+        <Layout>
           <Component {...pageProps} />
-        </TokenProvider>
+        </Layout>
       </AlertProvider>
-    </Layout>
+    </TokenProvider>
   );
 }

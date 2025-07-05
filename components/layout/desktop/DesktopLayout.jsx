@@ -9,7 +9,7 @@ function DesktopLayout() {
 
   return (
     <div className={styles.nav}>
-      {path !== '/auth/login' && path !== '/auth/signup' && (
+      {path == '/' && (
         <div className={styles.inputContainer}>
           <input type="text" placeholder="جست و جو" />
         </div>

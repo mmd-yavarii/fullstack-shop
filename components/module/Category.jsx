@@ -18,7 +18,7 @@ function Category() {
       </Link>
 
       {categories.map((i) => (
-        <Link className={`${styles.category} ${i.slug == category && styles.selected}`} href={`/?category=${i.slug}`}>
+        <Link key={i.id} className={`${styles.category} ${i.slug == category && styles.selected}`} href={`/?category=${i.slug}`}>
           {i.name}
         </Link>
       ))}

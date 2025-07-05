@@ -1,0 +1,68 @@
+.card {
+  width: 200px;
+  height: fit-content;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.imgContainer {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  background-color: #ececec;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card img {
+  position: static;
+  padding: 14px;
+  top: 10px;
+  max-width: 100%;
+  max-height: 100%;
+}
+.bookmarkBtn {
+  font-size: 1.3rem;
+  background-color: transparent;
+  color: var(--them-primery-color);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ffffff4a;
+  border: 1px solid #fff;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.title {
+  font-weight: 900;
+  margin: 10px 0;
+}
+
+.price {
+  display: flex;
+  gap: 10px;
+}
+
+.discounted {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+@media (max-width: 500px) {
+  .card {
+    width: 180px;
+  }
+  .imgContainer {
+    width: 180px;
+    height: 180px;
+  }
+}
