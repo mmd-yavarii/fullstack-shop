@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 1;
 }
 
 .linkContainer {
@@ -35,14 +36,6 @@
 
 .inputContainer {
   flex: 1;
-}
-
-.nav input {
-  border: 1px solid #ccc;
-  width: 100%;
-  max-width: 300px;
-  padding: 7px;
-  border-radius: 10px;
 }
 
 @media (max-width: 800px) {

@@ -1,11 +1,15 @@
 import Card from '../module/Card';
 import Category from '../module/Category';
+import SearchAndSort from '../module/SearchAndSort';
 
 import styles from './HomePage.module.css';
 
 function HomePage() {
   return (
     <div className={styles.container}>
+      <div className={styles.inpMobileContainer}>
+        <SearchAndSort />
+      </div>
       <Category />
 
       <div className={styles.productContainer}>

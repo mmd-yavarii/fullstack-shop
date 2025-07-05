@@ -9,6 +9,9 @@
   border-radius: 10px;
   transition: all 0.3s;
   margin-bottom: 7px;
+  background-color: transparent;
+  text-align: right;
+  font-size: 1rem;
 }
 
 .selected {
@@ -30,7 +33,6 @@
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    padding: 5px 10px;
     scroll-behavior: smooth;
 
     scrollbar-width: none;

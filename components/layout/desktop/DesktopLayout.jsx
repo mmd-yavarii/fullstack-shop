@@ -2,16 +2,17 @@ import Link from 'next/link';
 import styles from './DesktopLayout.module.css';
 import { useRouter } from 'next/router';
 import { useToken } from '@/contexts/TokenProvider';
+import SearchAndSort from '@/components/module/SearchAndSort';
 
 function DesktopLayout() {
-  const { asPath: path } = useRouter();
+  const { asPath: path, pathname } = useRouter();
   const token = useToken();
 
   return (
     <div className={styles.nav}>
-      {path == '/' && (
+      {pathname === '/' && (
         <div className={styles.inputContainer}>
-          <input type="text" placeholder="جست و جو" />
+          <SearchAndSort />
         </div>
       )}
 
