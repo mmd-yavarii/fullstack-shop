@@ -3,10 +3,18 @@ import styles from './DesktopLayout.module.css';
 import { useRouter } from 'next/router';
 import { useToken } from '@/contexts/TokenProvider';
 import SearchAndSort from '@/components/module/SearchAndSort';
+import { useEffect, useState } from 'react';
 
 function DesktopLayout() {
   const { asPath: path, pathname } = useRouter();
-  const token = useToken();
+  const [token] = useToken();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   return (
     <div className={styles.nav}>
@@ -35,12 +43,12 @@ function DesktopLayout() {
       </div>
 
       {token ? (
-        <Link href="profile" className={`${styles.profile} ${styles.link} ${path == '/profile' && styles.selected}`}>
+        <Link href="/profile" className={`${styles.profile} ${styles.link} ${path == '/profile' && styles.selected}`}>
           پروفایل
         </Link>
       ) : (
         <Link href="/auth/login" className={`${styles.profile} ${styles.link} ${path == '/auth/login' && styles.selected}`}>
-          ورود / ثبت ام
+          ورود / ثبت‌نام
         </Link>
       )}
     </div>

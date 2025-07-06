@@ -4,7 +4,7 @@ import SearchAndSort from '../module/SearchAndSort';
 
 import styles from './HomePage.module.css';
 
-function HomePage() {
+function HomePage({ products }) {
   return (
     <div className={styles.container}>
       <div className={styles.inpMobileContainer}>
@@ -12,14 +12,7 @@ function HomePage() {
       </div>
       <Category />
 
-      <div className={styles.productContainer}>
-        <Card title="هدفون بی‌سیم مدل XY-100" price={850000} discount={0} images={['/test.png']} />
-        <Card title="هدفون بی‌سیم مدل XY-100" price={850000} discount={15} images={['/test.png']} />
-        <Card title="هدفون بی‌سیم مدل XY-100" price={850000} discount={0} images={['/test.png']} />
-        <Card title="هدفون بی‌سیم مدل XY-100" price={850000} discount={15} images={['/test.png']} />
-        <Card title="هدفون بی‌سیم مدل XY-100" price={850000} discount={15} images={['/test.png']} />
-        <Card title="هدفون بی‌سیم مدل XY-100" price={850000} discount={15} images={['/test.png']} />
-      </div>
+      <div className={styles.productContainer}>{products && products.map((i) => <Card key={i._id} {...i} />)}</div>
     </div>
   );
 }
