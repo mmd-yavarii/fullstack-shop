@@ -1,6 +1,7 @@
 import Card from '../module/Card';
 import Category from '../module/Category';
 import SearchAndSort from '../module/SearchAndSort';
+import Empty from './Empty';
 
 import styles from './HomePage.module.css';
 
@@ -12,7 +13,7 @@ function HomePage({ products }) {
       </div>
       <Category />
 
-      <div className={styles.productContainer}>{products && products.map((i) => <Card key={i._id} {...i} />)}</div>
+      {products.length ? <div className={styles.productContainer}>{products && products.map((i) => <Card key={i._id} {...i} />)}</div> : <Empty />}
     </div>
   );
 }

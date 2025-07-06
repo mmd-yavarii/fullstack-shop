@@ -13,7 +13,7 @@ function Card({ discount, price, images, title, _id }) {
     <div className={styles.card}>
       <div className={styles.imgContainer}>
         <Link href={`/product/${_id}`}>
-          {/* <Image src={images[0]} alt={title} fill style={{ objectFit: 'contain', objectPosition: 'center' }} /> */}
+          <Image src={'/test.png'} alt={title} fill style={{ objectFit: 'contain', objectPosition: 'center' }} />
         </Link>
         <button className={styles.bookmarkBtn}>{isBookmark ? <PiHeartDuotone /> : <PiHeart />}</button>
       </div>

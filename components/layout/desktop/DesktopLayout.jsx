@@ -37,7 +37,7 @@ function DesktopLayout() {
           سبد خرید
         </Link>
 
-        <Link href="/" className={`${styles.link} ${path == '/' && styles.selected}`}>
+        <Link href="/" className={`${styles.link} ${pathname == '/' && styles.selected}`}>
           خانه
         </Link>
       </div>

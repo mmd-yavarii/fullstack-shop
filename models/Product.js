@@ -1,6 +1,12 @@
-import { model, models, Schema } from 'mongoose';
+import mongoose, { model, models, Schema } from 'mongoose';
 
 const ProductSchema = new Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+
   title: {
     type: String,
     required: true,

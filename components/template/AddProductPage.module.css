@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  justify-content: center;
+}
+.container div {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 10px;
+}
+
+.container input,
+.container select {
+  background-color: var(--inp-color);
+  border: 1px solid var(--border-color);
+  margin-bottom: 30px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.container label::after {
+  content: '*';
+  color: red;
+}
+.imgsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.imgsContainer img {
+  border-radius: 10px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  box-shadow: 0 0 5px #0000001a;
+  flex-shrink: 0;
+}
+
+.handlerBtn {
+  background-color: var(--them-primery-color);
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+}

@@ -3,11 +3,7 @@ import Product from '@/models/Product';
 import connectDb from '@/utils/connectDb';
 
 export default function Home({ products }) {
-  return (
-    <>
-      <HomePage products={products} />
-    </>
-  );
+  return <HomePage products={products} />;
 }
 
 export async function getServerSideProps(context) {
