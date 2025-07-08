@@ -19,6 +19,14 @@
 }
 
 @media (min-width: 800px) {
+  .container {
+    border-left: 1px solid #00000011;
+    padding-left: 10px;
+    position: sticky;
+    height: fit-content;
+    top: 90px;
+  }
+
   .category:hover {
     color: var(--them-primery-color);
     background-color: var(--them-secondary-color);

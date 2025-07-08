@@ -52,6 +52,17 @@
     gap: 30px;
   }
 
+  .searchAndSortSession {
+    display: flex;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--background-color);
+    padding-bottom: 10px;
+    flex-direction: column;
+  }
+
   .productContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

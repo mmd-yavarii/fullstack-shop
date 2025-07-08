@@ -8,10 +8,12 @@ import styles from './HomePage.module.css';
 function HomePage({ products }) {
   return (
     <div className={styles.container}>
-      <div className={styles.inpMobileContainer}>
-        <SearchAndSort />
+      <div className={styles.searchAndSortSession}>
+        <div className={styles.inpMobileContainer}>
+          <SearchAndSort />
+        </div>
+        <Category />
       </div>
-      <Category />
 
       {products.length ? <div className={styles.productContainer}>{products && products.map((i) => <Card key={i._id} {...i} />)}</div> : <Empty />}
     </div>

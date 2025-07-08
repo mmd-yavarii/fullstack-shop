@@ -48,7 +48,9 @@ export default function addProduct() {
   }, []);
 
   // add new product handler
-  async function handler() {}
+  async function handler() {
+    console.log(form);
+  }
 
   return <AddProductPage form={form} dispatchForm={dispatchForm} handler={handler} />;
 }

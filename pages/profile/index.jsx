@@ -4,8 +4,11 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import styles from '@/styles/profile.module.css';
+import Cookies from 'js-cookie';
+import { useAlert } from '@/contexts/AlertProvider';
 
 export default function Profile({}) {
+  const showAlert = useAlert();
   const router = useRouter();
   const [token] = useToken();
 
@@ -15,7 +18,12 @@ export default function Profile({}) {
 
   // log out handler
   function logoutHandler() {
-    console.log('logout');
+    const confirmation = confirm('ایا میخواهید از حسابتان خارج شوید ؟');
+    if (confirmation) {
+      Cookies.remove('token');
+      showAlert('success', 'خروج از حساب کاربری با موفقیت انجام شد');
+      router.reload('');
+    }
   }
 
   return (

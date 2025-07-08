@@ -1,0 +1,41 @@
+.card {
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  direction: ltr;
+}
+
+.info {
+  display: flex;
+  gap: 20px;
+}
+
+.imgContainer {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: var(--image-background-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.title {
+  font-weight: 900;
+  margin-bottom: 3px;
+}
+
+.discount {
+  opacity: 0.5;
+  text-decoration: line-through;
+  font-size: 0.9rem;
+}
+
+.price {
+  direction: ltr;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
