@@ -1,12 +1,26 @@
 import { PiHeart, PiHeartDuotone } from 'react-icons/pi';
 import styles from './BookmarkBtn.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useBookmarkContext } from '@/contexts/BookmarkProvider';
 
 export default function BookmarkBtn({ id }) {
-  const [isBook, setIsBook] = useState(false);
+  const [bookmarks, dispatchBookmarks] = useBookmarkContext();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  const isBook = bookmarks.includes(id);
+
+  function bookHandler() {
+    dispatchBookmarks({ type: isBook ? 'REMOVE' : 'ADD', payload: id });
+  }
 
   return (
-    <button className={styles.bookmarkBtn} onClick={() => setIsBook((prev) => !prev)}>
+    <button className={styles.bookmarkBtn} onClick={bookHandler}>
       {isBook ? <PiHeartDuotone /> : <PiHeart />}
     </button>
   );

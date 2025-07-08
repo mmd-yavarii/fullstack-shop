@@ -16,7 +16,7 @@ function Card({ discount, price, images, title, _id }) {
         </Link>
 
         <div className={styles.bookmarkBtn}>
-          <BookmarkBtn />
+          <BookmarkBtn id={_id} />
         </div>
       </div>
 

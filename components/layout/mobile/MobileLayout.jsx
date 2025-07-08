@@ -14,8 +14,6 @@ function MobileLayout({ children }) {
   const { asPath: path, pathname } = useRouter();
   const [token] = useToken();
 
-  console.log(pathname);
-
   return (
     <>
       {children}
