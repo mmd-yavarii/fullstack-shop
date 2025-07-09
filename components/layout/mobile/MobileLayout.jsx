@@ -7,18 +7,30 @@ import { PiHeart, PiHeartDuotone } from 'react-icons/pi';
 import { PiShoppingCartLight, PiShoppingCartDuotone } from 'react-icons/pi';
 import { PiChatDotsLight, PiChatDotsDuotone } from 'react-icons/pi';
 
-import styles from './MobileLayout.module.css';
 import { useToken } from '@/contexts/TokenProvider';
+import { useState, useEffect } from 'react';
+
+import styles from './MobileLayout.module.css';
 
 function MobileLayout({ children }) {
   const { asPath: path, pathname } = useRouter();
   const [token] = useToken();
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <>{children}</>;
+  }
+
   return (
     <>
       {children}
 
-      {path != '/auth/login' && path != '/auth/signup' && (
+      {path !== '/auth/login' && path !== '/auth/signup' && (
         <footer className={styles.footer}>
           <div className={`${styles.links} ${path.includes('/profile') && styles.selected}`}>
             <Link href={!token ? '/auth/login' : '/profile'}>
@@ -48,8 +60,8 @@ function MobileLayout({ children }) {
             <p>ذخیره شده</p>
           </div>
 
-          <div className={`${styles.links} ${pathname == '/' && styles.selected}`}>
-            <Link href="/">{pathname == '/' ? <PiHouseDuotone fontSize="1.6rem" /> : <PiHouse fontSize="1.6rem" />}</Link>
+          <div className={`${styles.links} ${pathname === '/' && styles.selected}`}>
+            <Link href="/">{pathname === '/' ? <PiHouseDuotone fontSize="1.6rem" /> : <PiHouse fontSize="1.6rem" />}</Link>
             <p>خانه</p>
           </div>
         </footer>

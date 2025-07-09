@@ -2,10 +2,17 @@ import Empty from '@/components/template/Empty';
 import CardSecondary from '@/components/module/CardSecondary';
 import BookmarkBtn from '@/components/module/BookmarkBtn';
 import { useBookmarkContext } from '@/contexts/BookmarkProvider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Bookmarks() {
   const [bookmarks, dispatchBookmarks] = useBookmarkContext();
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) return null;
 
   return (
     <>

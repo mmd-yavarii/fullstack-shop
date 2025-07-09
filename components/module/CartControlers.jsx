@@ -1,26 +1,25 @@
-import { useState } from 'react';
 import styles from './CartControlers.module.css';
 import { useCart } from '@/contexts/CartProvider';
 
 function CartControlers({ info }) {
-  const [cart, setCart] = useCart();
-  const [cartqty, serCartQty] = useState(0);
+  const [cart, dispatchCart] = useCart();
+
+  const itemInCart = cart.find((item) => item._id === info._id);
+  const cartqty = itemInCart ? itemInCart.cartQty : 0;
 
   function add() {
     if (cartqty < info.qty) {
-      serCartQty((prev) => prev + 1);
-      setCart({ type: 'ADD', payload: info });
+      dispatchCart({ type: 'ADD', payload: info });
     }
   }
 
   function remove() {
     if (cartqty > 0) {
-      serCartQty((prev) => prev - 1);
-      setCart({ type: 'REMOVE', payload: info });
+      dispatchCart({ type: 'REMOVE', payload: info });
     }
   }
 
-  if (!!cartqty) {
+  if (cartqty > 0) {
     return (
       <div className={styles.container}>
         <button onClick={add}>+</button>
@@ -28,13 +27,13 @@ function CartControlers({ info }) {
         <button onClick={remove}>-</button>
       </div>
     );
-  } else {
-    return (
-      <button className={styles.addToCartBtn} onClick={add}>
-        افزودن به سبد خرید
-      </button>
-    );
   }
+
+  return (
+    <button className={styles.addToCartBtn} onClick={add}>
+      افزودن به سبد خرید
+    </button>
+  );
 }
 
 export default CartControlers;
