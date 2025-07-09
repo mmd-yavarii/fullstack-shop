@@ -15,7 +15,7 @@ function HomePage({ products }) {
         <Category />
       </div>
 
-      {products.length ? <div className={styles.productContainer}>{products && products.map((i) => <Card key={i._id} {...i} />)}</div> : <Empty />}
+      {products.length ? <div className={styles.productContainer}>{products && products.map((i) => <Card key={i._id} info={i} />)}</div> : <Empty />}
     </div>
   );
 }

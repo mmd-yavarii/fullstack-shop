@@ -5,8 +5,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import BookmarkBtn from './BookmarkBtn';
 
-function Card({ discount, price, images, title, _id }) {
-  const [isBookmark, setIsBookmark] = useState(false);
+function Card({ info }) {
+  const { discount, price, images, title, _id } = info;
 
   return (
     <div className={styles.card}>
@@ -15,8 +15,10 @@ function Card({ discount, price, images, title, _id }) {
           <Image src={'/test.png'} alt={title} fill style={{ objectFit: 'contain', objectPosition: 'center' }} />
         </Link>
 
+        {discount && <p className={styles.discount}>-{discount} %</p>}
+
         <div className={styles.bookmarkBtn}>
-          <BookmarkBtn id={_id} />
+          <BookmarkBtn info={info} />
         </div>
       </div>
 
