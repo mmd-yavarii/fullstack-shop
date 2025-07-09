@@ -20,8 +20,10 @@ export default function BookmarkBtn({ info }) {
   function bookHandler() {
     if (isBook) {
       const confirmation = confirm('آیا مطمئن هستید که می‌خواهید این آیتم را از بوکمارک حذف کنید؟');
-      confirmation && dispatchBookmarks({ type: 'REMOVE', payload: info });
-      showAlert('error', 'حذف از بوکمارک انجام شد');
+      if (confirmation) {
+        dispatchBookmarks({ type: 'REMOVE', payload: info });
+        showAlert('error', 'حذف از بوکمارک انجام شد');
+      }
     } else {
       dispatchBookmarks({ type: 'ADD', payload: info });
       showAlert('success', 'بوکمارک شد');

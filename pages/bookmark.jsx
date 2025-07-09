@@ -11,7 +11,7 @@ export default function Bookmarks() {
     <>
       {bookmarks.length ? (
         bookmarks.map((i) => (
-          <CardSecondary image={'/test.png'} {...i}>
+          <CardSecondary key={i._id} image={'/test.png'} {...i}>
             <BookmarkBtn info={i} />
           </CardSecondary>
         ))

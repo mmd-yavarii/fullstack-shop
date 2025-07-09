@@ -1,0 +1,27 @@
+.container {
+  background-color: var(--inp-color);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.container button,
+.container p {
+  padding: 2px 10px;
+  text-align: center;
+  background-color: transparent;
+}
+
+.container button {
+  font-size: 1.3rem;
+  padding: 0 10px;
+}
+
+.addToCartBtn {
+  background-color: var(--them-primery-color);
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
