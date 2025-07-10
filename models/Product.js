@@ -39,6 +39,12 @@ const ProductSchema = new Schema({
     min: 0,
   },
 
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+
   discount: {
     type: Number,
     default: 0,

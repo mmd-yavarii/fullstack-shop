@@ -11,6 +11,7 @@ const initialState = {
   price: 0,
   discount: 0,
   images: [],
+  userId: '',
 };
 
 function reducer(state, action) {

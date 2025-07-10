@@ -15,7 +15,9 @@ export default async function handler(req, res) {
     const findUser = await User.findOne({ phone: phone });
     if (!findUser || findUser.password !== password) return res.status(404).json({ status: 'error', message: 'کاربری با این مشخصات یافت نشد' });
 
-    const token = sign({ phone: findUser.phone }, process.env.SECRET_KEY);
+    const payload = { id: findUser._id, phone: findUser.phone, role: findUser.role, name: findUser.name };
+    const token = sign(payload, process.env.SECRET_KEY, { expiresIn: '7d' });
+
     res.status(201).json({ status: 'success', message: 'ورود با موفقیت انجام شد', data: token });
   } catch (error) {
     console.log(`\n❌${error}\n`);

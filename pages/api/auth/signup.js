@@ -16,7 +16,10 @@ export default async function handler(req, res) {
     if (findUser) return res.status(400).json({ status: 'error', message: 'کاربری با این شماره تماس از قبل وجود دارد' });
 
     const response = await User.create({ name, phone, password });
-    const token = sign({ phone }, process.env.SECRET_KEY);
+
+    const payload = { id: response._id, phone: response.phone, role: response.role, name: response.name };
+    const token = sign(payload, process.env.SECRET_KEY, { expiresIn: '7d' });
+
     res.status(201).json({ status: 'success', message: 'کاربر با موفقیت ایجاد شد', data: token });
   } catch (error) {
     console.log(`\n❌${error}\n`);

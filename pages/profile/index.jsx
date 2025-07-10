@@ -1,20 +1,15 @@
-import { useToken } from '@/contexts/TokenProvider';
+import { verify } from 'jsonwebtoken';
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 import styles from '@/styles/profile.module.css';
 import Cookies from 'js-cookie';
 import { useAlert } from '@/contexts/AlertProvider';
+import { useRouter } from 'next/router';
 
-export default function Profile({}) {
+export default function Profile({ info }) {
   const showAlert = useAlert();
   const router = useRouter();
-  const [token] = useToken();
-
-  useEffect(() => {
-    if (!token) router.replace('/auth/login');
-  }, []);
 
   // log out handler
   function logoutHandler() {
@@ -22,7 +17,7 @@ export default function Profile({}) {
     if (confirmation) {
       Cookies.remove('token');
       showAlert('success', 'خروج از حساب کاربری با موفقیت انجام شد');
-      router.reload('');
+      router.replace('/');
     }
   }
 
@@ -30,8 +25,43 @@ export default function Profile({}) {
     <div className={styles.container}>
       <Link href="./profile/add-product">افزودن محصول</Link>
       <Link href="./profile/my-products">لیست محصولات من</Link>
-      <Link href="./profile/admin">پنل ادمین</Link>
+      {info.role == 'admin' && <Link href="./profile/admin">پنل ادمین</Link>}
       <button onClick={logoutHandler}>خروج از حساب کاربی</button>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const cookies = context.req.headers.cookie || '';
+  const token = cookies
+    .split('; ')
+    .find((c) => c.startsWith('token='))
+    ?.split('=')[1];
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    const decoded = verify(token, process.env.SECRET_KEY);
+
+    return {
+      props: {
+        info: JSON.parse(JSON.stringify(decoded)),
+      },
+    };
+  } catch (error) {
+    console.log('JWT verification error:', error.message);
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
 }

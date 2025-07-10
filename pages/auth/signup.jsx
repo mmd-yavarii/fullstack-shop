@@ -1,8 +1,10 @@
+import { verify } from 'jsonwebtoken';
+
 import { useAlert } from '@/contexts/AlertProvider';
-import { useToken } from '@/contexts/TokenProvider';
 import Form from '@/template/Form';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useToken } from '@/contexts/TokenProvider';
 
 export default function Signup() {
   const showAlert = useAlert();
@@ -16,12 +18,6 @@ export default function Signup() {
     password: '',
     repassword: '',
   });
-
-  useEffect(() => {
-    if (token.length) {
-      router.replace('/');
-    }
-  }, [token]);
 
   // sign up handler
   async function signupHandler() {
@@ -48,6 +44,7 @@ export default function Signup() {
 
       if (result.status === 'success') {
         setToken(result.data);
+        router.replace('/');
       }
     } finally {
       setLoading(false);
@@ -55,4 +52,30 @@ export default function Signup() {
   }
 
   return <Form state={form} setState={setForm} handler={signupHandler} loading={loading} />;
+}
+
+// validation and redirect
+export async function getServerSideProps(context) {
+  const cookies = context.req.headers.cookie || '';
+  const token = cookies
+    .split('; ')
+    .find((c) => c.startsWith('token='))
+    ?.split('=')[1];
+
+  try {
+    const decoded = verify(token, process.env.SECRET_KEY);
+    if (decoded) {
+      return {
+        redirect: {
+          destination: '/',
+        },
+      };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return {
+    props: {},
+  };
 }
