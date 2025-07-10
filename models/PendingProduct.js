@@ -1,6 +1,7 @@
-import mongoose, { model, models, Schema } from 'mongoose';
+import mongoose, { model, models } from 'mongoose';
+import { Schema } from 'mongoose';
 
-const ProductSchema = new Schema({
+const PendingSchema = new Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -47,5 +48,5 @@ const ProductSchema = new Schema({
   },
 });
 
-const Product = models.Product || model('Product', ProductSchema);
-export default Product;
+const PendingProduct = models.PendingProduct || model('PendingProduct', PendingSchema);
+export default PendingProduct;

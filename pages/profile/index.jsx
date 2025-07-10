@@ -23,6 +23,11 @@ export default function Profile({ info }) {
 
   return (
     <div className={styles.container}>
+      <div className={styles.info}>
+        <p>{info.name}</p>
+        <p>{info.phone}</p>
+      </div>
+
       <Link href="./profile/add-product">افزودن محصول</Link>
       <Link href="./profile/my-products">لیست محصولات من</Link>
       {info.role == 'admin' && <Link href="./profile/admin">پنل ادمین</Link>}

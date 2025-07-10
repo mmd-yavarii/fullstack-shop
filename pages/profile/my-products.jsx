@@ -1,16 +1,48 @@
-import { useToken } from '@/contexts/TokenProvider';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import mongoose from 'mongoose';
+import { verify } from 'jsonwebtoken';
 
-function MyProducts() {
-  const router = useRouter();
-  const [token] = useToken();
+import connectDb from '@/utils/connectDb';
+import Product from '@/models/Product';
+import PendingProduct from '@/models/PendingProduct';
 
-  useEffect(() => {
-    if (!token) router.replace('/auth/login');
-  }, []);
-
+export default function MyProducts({ myProducts, myPendingProducts }) {
   return <div>MyProducts</div>;
 }
 
-export default MyProducts;
+export async function getServerSideProps(context) {
+  const cookies = context.req.headers.cookie || '';
+  const token = cookies
+    .split('; ')
+    .find((c) => c.startsWith('token='))
+    ?.split('=')[1];
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    await connectDb();
+    const decoded = verify(token, process.env.SECRET_KEY);
+
+    const userId = new mongoose.Types.ObjectId(decoded.id);
+    const myProducts = await Product.find({ userId });
+    const myPendingProduct = await PendingProduct.find({ userId });
+
+    return {
+      props: {
+        myProducts: JSON.parse(JSON.stringify(myProducts)),
+        myPendingProducts: JSON.parse(JSON.stringify(myPendingProduct)),
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      notFound: true,
+    };
+  }
+}

@@ -1,3 +1,9 @@
+.info p:first-child {
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
