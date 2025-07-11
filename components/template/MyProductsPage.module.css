@@ -1,0 +1,14 @@
+.pendingSession {
+  margin-bottom: 50px;
+  opacity: 0.8;
+}
+
+.pendingMessage,
+.acceptedMessage {
+  font-size: 0.9rem;
+  color: #f95959;
+}
+
+.acceptedMessage {
+  color: #30b76f;
+}

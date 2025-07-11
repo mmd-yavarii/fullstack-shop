@@ -2,12 +2,12 @@ import Image from 'next/image';
 import styles from './CardSecondary.module.css';
 import Link from 'next/link';
 
-export default function CardSecondary({ image, title, price, _id, discount, children }) {
+export default function CardSecondary({ image, title, price, _id, discount, children, disabled = false }) {
   const finalPrice = price * (1 - discount / 100);
 
   return (
     <div className={styles.card}>
-      <Link href={`/product/${_id}`} className={styles.info}>
+      <Link href={disabled ? '' : `/product/${_id}`} className={styles.info}>
         <div className={styles.imgContainer}>
           <Image src={image} alt={title} fill />
         </div>

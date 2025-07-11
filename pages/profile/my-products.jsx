@@ -4,9 +4,10 @@ import { verify } from 'jsonwebtoken';
 import connectDb from '@/utils/connectDb';
 import Product from '@/models/Product';
 import PendingProduct from '@/models/PendingProduct';
+import MyProductsPage from '@/components/template/MyProductsPage';
 
 export default function MyProducts({ myProducts, myPendingProducts }) {
-  return <div>MyProducts</div>;
+  return <MyProductsPage myProducts={myProducts} myPendingProducts={myPendingProducts} />;
 }
 
 export async function getServerSideProps(context) {
