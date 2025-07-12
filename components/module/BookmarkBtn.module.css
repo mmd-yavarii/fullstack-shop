@@ -2,6 +2,7 @@
   font-size: 1.4rem;
   background-color: transparent;
   color: var(--them-primery-color);
+  background-color: #ffffffe9;
   width: 30px;
   height: 30px;
   display: flex;

@@ -110,6 +110,11 @@
   font-weight: bold;
 }
 
+.therControlers {
+  display: flex;
+  gap: 10px;
+}
+
 @media (min-width: 800px) {
   .container {
     flex-direction: row-reverse;

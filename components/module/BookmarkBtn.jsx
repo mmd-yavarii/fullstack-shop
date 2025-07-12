@@ -1,4 +1,4 @@
-import { PiHeart, PiHeartDuotone } from 'react-icons/pi';
+import { PiHeart, PiHeartDuotone, PiHeartStraightFill } from 'react-icons/pi';
 import styles from './BookmarkBtn.module.css';
 import { useEffect, useState } from 'react';
 import { useBookmarkContext } from '@/contexts/BookmarkProvider';

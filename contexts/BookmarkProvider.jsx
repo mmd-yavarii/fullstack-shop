@@ -8,7 +8,7 @@ function reducer(state, action) {
       return [...state, action.payload];
 
     case 'REMOVE':
-      return state.filter((i) => i !== action.payload);
+      return state.filter((i) => i.id !== action.payload.id);
 
     default:
       throw new Error('Action is not defined');

@@ -12,7 +12,14 @@ function Card({ info }) {
     <div className={styles.card}>
       <div className={styles.imgContainer}>
         <Link href={`/product/${_id}`}>
-          <Image src={'/test.png'} alt={title} fill style={{ objectFit: 'contain', objectPosition: 'center' }} />
+          <img
+            src={
+              'https://hips.hearstapps.com/hmg-prod/images/iphone-16-review-lead-6724ffef2985f.jpg?crop=0.6668170878459687xw:1xh;center,top&resize=640:*'
+            }
+            alt={title}
+            width="100%"
+            style={{ objectFit: 'contain', objectPosition: 'center' }}
+          />
         </Link>
 
         {discount && <p className={styles.discount}>-{discount} %</p>}

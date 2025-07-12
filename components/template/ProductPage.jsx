@@ -8,6 +8,7 @@ import { TbEdit } from 'react-icons/tb';
 import { IoArrowBack } from 'react-icons/io5';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import BookmarkBtn from '../module/BookmarkBtn';
 
 function ProductPage({ product, user }) {
   const router = useRouter();
@@ -69,13 +70,16 @@ function ProductPage({ product, user }) {
 
         <p>{product.description}</p>
 
+        {product.qty == 1 && <p style={{ color: '#f95959' }}>تنها یک عدد در انبار باقی مانده</p>}
+
         <div className={styles.price}>
           <span> {product.price * (1 - product.discount / 100).toLocaleString()} تومان</span>
           {product.discount > 0 && <span className={styles.discount}>{product.price.toLocaleString()} تومان</span>}
         </div>
 
-        <div>
+        <div className={styles.therControlers}>
           <CartControlers info={product} />
+          <BookmarkBtn info={product} />
         </div>
       </div>
     </div>
