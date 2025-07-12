@@ -31,7 +31,7 @@ export default function BookmarkBtn({ info }) {
   }
 
   return (
-    <button className={styles.bookmarkBtn} onClick={bookHandler}>
+    <button className={`${styles.bookmarkBtn} glass`} onClick={bookHandler}>
       {isBook ? <PiHeartDuotone /> : <PiHeart />}
     </button>
   );

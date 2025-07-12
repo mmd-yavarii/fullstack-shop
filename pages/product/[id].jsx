@@ -1,43 +1,34 @@
-import ProductPage from '@/components/template/ProductPage';
 import Product from '@/models/Product';
 import connectDb from '@/utils/connectDb';
 
-export default function ProductDetail({ info }) {
-  return <ProductPage info={info} />;
+import ProductPage from '@/components/template/ProductPage';
+import { verify } from 'jsonwebtoken';
+
+export default function ProductDetail({ product, user }) {
+  return <ProductPage product={product} user={user} />;
 }
 
-export async function getStaticPaths() {
-  try {
-    await connectDb();
-    const ids = await Product.find({}, { _id: 1 });
-    const paths = ids.map((i) => ({ params: { id: i._id.toString() } }));
-
-    return {
-      paths,
-      fallback: false,
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      paths: [],
-      fallback: false,
-    };
-  }
-}
-
-export async function getStaticProps(context) {
+// get product's info from db
+export async function getServerSideProps(context) {
   const { id } = context.params;
 
   try {
     await connectDb();
+    const product = await Product.findById(id);
 
-    const info = await Product.findById(id);
+    const cookies = context.req.headers.cookie || '';
+    const token = cookies
+      .split('; ')
+      .find((c) => c.startsWith('token='))
+      ?.split('=')[1];
+
+    const decoded = verify(token, process.env.SECRET_KEY);
 
     return {
       props: {
-        info: JSON.parse(JSON.stringify(info)),
+        product: JSON.parse(JSON.stringify(product)),
+        user: JSON.parse(JSON.stringify(decoded)),
       },
-      revalidate: 300,
     };
   } catch (error) {
     console.log(error);
