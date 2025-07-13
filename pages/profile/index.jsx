@@ -12,13 +12,20 @@ export default function Profile({ info }) {
   const router = useRouter();
 
   // log out handler
-  function logoutHandler() {
+  async function logoutHandler() {
     const confirmation = confirm('آیا می‌خواهید از حساب کاربری خارج شوید؟');
-    if (confirmation) {
-      document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    if (!confirmation) return;
 
-      showAlert('success', 'خروج از حساب کاربری با موفقیت انجام شد');
-      router.reload('/');
+    try {
+      const response = await fetch('/api/auth/logout');
+      const result = await response.json();
+      showAlert(response.status, result.message);
+      if (response.ok) {
+        router.replace('/');
+      }
+    } catch (error) {
+      console.error(error);
+      showAlert('error', 'خطا در برقراری ارتباط با سرور');
     }
   }
 
