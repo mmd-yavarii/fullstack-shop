@@ -1,11 +1,11 @@
 import { verify } from 'jsonwebtoken';
 
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import styles from '@/styles/profile.module.css';
-import Cookies from 'js-cookie';
+
 import { useAlert } from '@/contexts/AlertProvider';
-import { useRouter } from 'next/router';
 
 export default function Profile({ info }) {
   const showAlert = useAlert();
@@ -13,11 +13,12 @@ export default function Profile({ info }) {
 
   // log out handler
   function logoutHandler() {
-    const confirmation = confirm('ایا میخواهید از حسابتان خارج شوید ؟');
+    const confirmation = confirm('آیا می‌خواهید از حساب کاربری خارج شوید؟');
     if (confirmation) {
-      Cookies.remove('token');
+      document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+
       showAlert('success', 'خروج از حساب کاربری با موفقیت انجام شد');
-      router.replace('/');
+      router.reload('/');
     }
   }
 

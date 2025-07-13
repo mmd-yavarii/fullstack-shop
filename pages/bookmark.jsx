@@ -3,6 +3,7 @@ import CardSecondary from '@/components/module/CardSecondary';
 import BookmarkBtn from '@/components/module/BookmarkBtn';
 import { useBookmarkContext } from '@/contexts/BookmarkProvider';
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 
 export default function Bookmarks() {
   const [bookmarks, dispatchBookmarks] = useBookmarkContext();
@@ -16,6 +17,10 @@ export default function Bookmarks() {
 
   return (
     <>
+      <Head>
+        <title>ذخیره شده ها</title>
+      </Head>
+
       {bookmarks.length ? (
         bookmarks.map((i) => (
           <CardSecondary key={i._id} image={'/test.png'} {...i}>

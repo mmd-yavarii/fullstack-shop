@@ -7,24 +7,10 @@ import { PiHeart, PiHeartDuotone } from 'react-icons/pi';
 import { PiShoppingCartLight, PiShoppingCartDuotone } from 'react-icons/pi';
 import { PiChatDotsLight, PiChatDotsDuotone } from 'react-icons/pi';
 
-import { useToken } from '@/contexts/TokenProvider';
-import { useState, useEffect } from 'react';
-
 import styles from './MobileLayout.module.css';
 
 function MobileLayout({ children }) {
   const { asPath: path, pathname } = useRouter();
-  const [token] = useToken();
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <>{children}</>;
-  }
 
   return (
     <>
@@ -33,30 +19,26 @@ function MobileLayout({ children }) {
       {path !== '/auth/login' && path !== '/auth/signup' && (
         <footer className={styles.footer}>
           <div className={`${styles.links} ${path.includes('/profile') && styles.selected}`}>
-            <Link href={!token ? '/auth/login' : '/profile'}>
+            <Link href={'/profile'}>
               {path.includes('/profile') ? <PiUserCircleDuotone fontSize="1.6rem" /> : <PiUserCircleLight fontSize="1.6rem" />}
             </Link>
             <p>پروفایل</p>
           </div>
 
           <div className={`${styles.links} ${path.includes('/chat') && styles.selected}`}>
-            <Link href={!token ? '/auth/login' : '/chat'}>
-              {path.includes('/chat') ? <PiChatDotsDuotone fontSize="1.6rem" /> : <PiChatDotsLight fontSize="1.6rem" />}
-            </Link>
+            <Link href={'/chat'}>{path.includes('/chat') ? <PiChatDotsDuotone fontSize="1.6rem" /> : <PiChatDotsLight fontSize="1.6rem" />}</Link>
             <p>پیام</p>
           </div>
 
           <div className={`${styles.links} ${path.includes('/cart') && styles.selected}`}>
-            <Link href={!token ? '/auth/login' : '/cart'}>
+            <Link href={'/cart'}>
               {path.includes('/cart') ? <PiShoppingCartDuotone fontSize="1.6rem" /> : <PiShoppingCartLight fontSize="1.6rem" />}
             </Link>
             <p>سبد خرید</p>
           </div>
 
           <div className={`${styles.links} ${path.includes('/bookmark') && styles.selected}`}>
-            <Link href={!token ? '/auth/login' : '/bookmark'}>
-              {path.includes('/bookmark') ? <PiHeartDuotone fontSize="1.6rem" /> : <PiHeart fontSize="1.6rem" />}
-            </Link>
+            <Link href={'/bookmark'}>{path.includes('/bookmark') ? <PiHeartDuotone fontSize="1.6rem" /> : <PiHeart fontSize="1.6rem" />}</Link>
             <p>ذخیره شده</p>
           </div>
 

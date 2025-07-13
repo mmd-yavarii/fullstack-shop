@@ -4,12 +4,10 @@ import { useAlert } from '@/contexts/AlertProvider';
 import Form from '@/template/Form';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useToken } from '@/contexts/TokenProvider';
 
 export default function Signup() {
   const showAlert = useAlert();
   const router = useRouter();
-  const [token, setToken] = useToken();
 
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -37,7 +35,6 @@ export default function Signup() {
       showAlert(result.status, result.message);
 
       if (result.status === 'success') {
-        setToken(result.data);
         router.replace('/');
       }
     } finally {

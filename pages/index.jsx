@@ -1,9 +1,18 @@
 import HomePage from '@/components/template/HomePage';
 import Product from '@/models/Product';
 import connectDb from '@/utils/connectDb';
+import Head from 'next/head';
 
 export default function Home({ products }) {
-  return <HomePage products={products} />;
+  return (
+    <>
+      <Head>
+        <title>محصولات</title>
+      </Head>
+
+      <HomePage products={products} />
+    </>
+  );
 }
 
 export async function getServerSideProps(context) {

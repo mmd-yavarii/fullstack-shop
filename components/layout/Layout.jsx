@@ -4,8 +4,6 @@ import { useRouter } from 'next/router';
 
 function Layout({ children }) {
   const router = useRouter();
-  // /product
-  console.log(router.pathname);
 
   return (
     <>

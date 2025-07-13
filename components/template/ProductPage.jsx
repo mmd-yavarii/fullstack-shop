@@ -9,6 +9,7 @@ import { IoArrowBack } from 'react-icons/io5';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import BookmarkBtn from '../module/BookmarkBtn';
+import Head from 'next/head';
 
 function ProductPage({ product, user }) {
   const router = useRouter();
@@ -33,56 +34,62 @@ function ProductPage({ product, user }) {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.imgSession}>
-        <div className={styles.imgContainer}>
-          <div className={styles.buttons}>
-            <button className="glass" onClick={() => router.back()}>
-              <IoArrowBack />
-            </button>
+    <>
+      <Head>
+        <title>{product.title}</title>
+      </Head>
 
-            {(user.id == product.userId || user.role == 'admin') && (
-              <div>
-                <button className="glass" onClick={deleteProduct}>
-                  <FiTrash2 />
-                </button>
+      <div className={styles.container}>
+        <div className={styles.imgSession}>
+          <div className={styles.imgContainer}>
+            <div className={styles.buttons}>
+              <button className="glass" onClick={() => router.back()}>
+                <IoArrowBack />
+              </button>
 
-                <button className="glass" onClick={editProduct}>
-                  <TbEdit />
-                </button>
-              </div>
-            )}
+              {(user.id == product.userId || user.role == 'admin') && (
+                <div>
+                  <button className="glass" onClick={deleteProduct}>
+                    <FiTrash2 />
+                  </button>
+
+                  <button className="glass" onClick={editProduct}>
+                    <TbEdit />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* <Image src={imgSelected} alt={product.title} fill /> */}
+            <img src={imgSelected} alt={product.title} width={'100%'} />
           </div>
 
-          {/* <Image src={imgSelected} alt={product.title} fill /> */}
-          <img src={imgSelected} alt={product.title} width={'100%'} />
+          <div className={styles.otherImages}>
+            {imgs.map((i) => (
+              <img key={i} onClick={() => setImgSelected(i)} className={imgSelected == i ? styles.selected : styles.fade} src={i} alt="" />
+            ))}
+          </div>
         </div>
 
-        <div className={styles.otherImages}>
-          {imgs.map((i) => (
-            <img onClick={() => setImgSelected(i)} className={imgSelected == i ? styles.selected : styles.fade} src={i} alt="" />
-          ))}
-        </div>
-      </div>
+        <div className={styles.information}>
+          <p className={styles.productsTitle}>{product.title}</p>
 
-      <div className={styles.information}>
-        <p className={styles.productsTitle}>{product.title}</p>
+          <p>{product.description}</p>
 
-        <p>{product.description}</p>
+          {product.qty == 1 && <p style={{ color: '#f95959' }}>تنها یک عدد در انبار باقی مانده</p>}
 
-        {product.qty == 1 && <p style={{ color: '#f95959' }}>تنها یک عدد در انبار باقی مانده</p>}
+          <div className={styles.price}>
+            <span> {product.price * (1 - product.discount / 100).toLocaleString()} تومان</span>
+            {product.discount > 0 && <span className={styles.discount}>{product.price.toLocaleString()} تومان</span>}
+          </div>
 
-        <div className={styles.price}>
-          <span> {product.price * (1 - product.discount / 100).toLocaleString()} تومان</span>
-          {product.discount > 0 && <span className={styles.discount}>{product.price.toLocaleString()} تومان</span>}
-        </div>
-
-        <div className={styles.therControlers}>
-          <CartControlers info={product} />
-          <BookmarkBtn info={product} />
+          <div className={styles.therControlers}>
+            <CartControlers info={product} />
+            <BookmarkBtn info={product} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

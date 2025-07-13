@@ -1,52 +1,14 @@
 import AddProductPage from '@/components/template/AddProductPage';
-import { useToken } from '@/contexts/TokenProvider';
-import { useRouter } from 'next/router';
-import { useEffect, useReducer } from 'react';
+import { addProducReducer, addProductInitialState } from '@/helper/addProductReducer';
+import connectDb from '@/utils/connectDb';
+import { verify } from 'jsonwebtoken';
 
-const initialState = {
-  title: '',
-  description: '',
-  category: '',
-  qty: 0,
-  price: 0,
-  discount: 0,
-  images: [],
-  userId: '',
-};
+import { useReducer } from 'react';
 
-function reducer(state, action) {
-  switch (action.type) {
-    case 'TITLE':
-      return { ...state, title: action.payload };
-
-    case 'DESCRIPTION':
-      return { ...state, description: action.payload };
-
-    case 'CATEGORY':
-      return { ...state, category: action.payload };
-
-    case 'QTY':
-      return { ...state, qty: action.payload };
-
-    case 'PRICE':
-      return { ...state, price: action.payload };
-
-    case 'DISCOUNT':
-      return { ...state, discount: action.payload };
-
-    case 'IMAGES':
-      return { ...state, images: [...state.images, action.payload] };
-  }
-}
-
-export default function addProduct() {
-  const [form, dispatchForm] = useReducer(reducer, initialState);
-  const router = useRouter();
-  const [token] = useToken();
-
-  useEffect(() => {
-    if (!token) router.replace('/auth/login');
-  }, []);
+// main page component
+export default function AddProduct({ userId }) {
+  const [form, dispatchForm] = useReducer(addProducReducer, addProductInitialState);
+  addProductInitialState.userId = userId;
 
   // add new product handler
   async function handler() {
@@ -54,4 +16,40 @@ export default function addProduct() {
   }
 
   return <AddProductPage form={form} dispatchForm={dispatchForm} handler={handler} />;
+}
+
+// redirect and get user id
+export async function getServerSideProps(context) {
+  const cookies = context.req.headers.cookie || '';
+  const token = cookies
+    .split('; ')
+    .find((c) => c.startsWith('token='))
+    ?.split('=')[1];
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    await connectDb();
+    const decoded = verify(token, process.env.SECRET_KEY);
+
+    const userId = decoded.id;
+
+    return {
+      props: {
+        userId,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      notFound: true,
+    };
+  }
 }

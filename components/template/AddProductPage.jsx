@@ -22,17 +22,17 @@ function AddProductPage({ form, dispatchForm, handler }) {
 
       <div>
         <label htmlFor="price">قیمت</label>
-        <input type="number" id="price" value={form.price} onChange={(e) => changeHandler('PRICE', +e.target.value)} />
+        <input type="number" id="price" onChange={(e) => changeHandler('PRICE', +e.target.value)} />
       </div>
 
       <div>
         <label htmlFor="qty">تعداد</label>
-        <input type="text" id="qty" value={form.qty} onChange={(e) => changeHandler('QTY', +e.target.value)} />
+        <input type="number" id="qty" onChange={(e) => changeHandler('QTY', +e.target.value)} />
       </div>
 
       <div>
         <label htmlFor="discount">تخفیف (درصد)</label>
-        <input type="text" id="discount" value={form.discount} onChange={(e) => changeHandler('DISCOUNT', +e.target.value)} />
+        <input type="number" id="discount" onChange={(e) => changeHandler('DISCOUNT', +e.target.value)} />
       </div>
 
       <div>
