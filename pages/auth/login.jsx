@@ -47,11 +47,7 @@ export default function Signup() {
 
 // validation and redirect
 export async function getServerSideProps(context) {
-  const cookies = context.req.headers.cookie || '';
-  const token = cookies
-    .split('; ')
-    .find((c) => c.startsWith('token='))
-    ?.split('=')[1];
+  const { token } = context.req.cookies;
 
   try {
     const decoded = verify(token, process.env.SECRET_KEY);

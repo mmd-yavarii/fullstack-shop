@@ -45,11 +45,7 @@ export default function Profile({ info }) {
 }
 
 export async function getServerSideProps(context) {
-  const cookies = context.req.headers.cookie || '';
-  const token = cookies
-    .split('; ')
-    .find((c) => c.startsWith('token='))
-    ?.split('=')[1];
+  const { token } = context.req.cookies;
 
   if (!token) {
     return {
