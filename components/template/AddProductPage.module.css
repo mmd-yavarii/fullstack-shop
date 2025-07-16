@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 30px;
+}
+
+.container input,
+.container select {
+  border: 1px solid var(--border-color);
+  outline: none;
+  background-color: var(--inp-color);
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.required::after {
+  content: ' *';
+  color: red;
+}
+
+.addedImages {
+  opacity: 0.7;
+  font-size: 0.9rem;
+  margin-right: 10px;
+}
+
+.images {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+.images input,
+.images button {
+  background-color: var(--inp-color);
+  border: var(--border-color);
+  padding: 5px;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 250px;
+}
+.images button {
+  background-color: var(--inp-color);
+  padding: 5px 15px;
+}
+
+.add {
+  outline: none;
+  background-color: var(--them-primery-color);
+  color: #fff;
+  font-weight: 900;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 800px) {
+  .container {
+    padding-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .images {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .images label {
+    width: 100%;
+  }
+}
