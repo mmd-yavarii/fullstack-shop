@@ -41,7 +41,7 @@ export default function Signup() {
       showAlert(result.status, result.message);
 
       if (result.status === 'success') {
-        router.replace('/');
+        router.replace('/profile');
       }
     } finally {
       setLoading(false);
@@ -60,7 +60,7 @@ export async function getServerSideProps(context) {
     if (decoded) {
       return {
         redirect: {
-          destination: '/',
+          destination: '/profile',
         },
       };
     }

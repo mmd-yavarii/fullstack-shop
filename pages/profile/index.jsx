@@ -6,10 +6,13 @@ import { useRouter } from 'next/router';
 import styles from '@/styles/profile.module.css';
 
 import { useAlert } from '@/contexts/AlertProvider';
+import { useState } from 'react';
+import { BeatLoader } from 'react-spinners';
 
 export default function Profile({ info }) {
   const showAlert = useAlert();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   // log out handler
   async function logoutHandler() {
@@ -17,6 +20,7 @@ export default function Profile({ info }) {
     if (!confirmation) return;
 
     try {
+      setIsLoading(true);
       const response = await fetch('/api/auth/logout');
       const result = await response.json();
       showAlert(response.status, result.message);
@@ -26,6 +30,8 @@ export default function Profile({ info }) {
     } catch (error) {
       console.error(error);
       showAlert('error', 'خطا در برقراری ارتباط با سرور');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -39,7 +45,7 @@ export default function Profile({ info }) {
       <Link href="./profile/add-product">افزودن محصول</Link>
       <Link href="./profile/my-products">لیست محصولات من</Link>
       {info.role == 'admin' && <Link href="./profile/admin">پنل ادمین</Link>}
-      <button onClick={logoutHandler}>خروج از حساب کاربی</button>
+      <button onClick={logoutHandler}>{isLoading ? <BeatLoader size="0.6rem" color="#ea2b2b" /> : 'خروج از حساب کاربی'}</button>
     </div>
   );
 }

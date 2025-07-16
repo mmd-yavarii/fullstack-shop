@@ -17,9 +17,9 @@ function DesktopLayout() {
       )}
 
       <div className={styles.linkContainer}>
-        <Link href="/chat" className={`${styles.link} ${path == '/chat' && styles.selected}`}>
+        {/* <Link href="/chat" className={`${styles.link} ${path == '/chat' && styles.selected}`}>
           پیام
-        </Link>
+        </Link> */}
 
         <Link href="/bookmark" className={`${styles.link} ${path == '/bookmark' && styles.selected}`}>
           ذخیره شده ها

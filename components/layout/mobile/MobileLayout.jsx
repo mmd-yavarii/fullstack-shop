@@ -25,10 +25,10 @@ function MobileLayout({ children }) {
             <p>پروفایل</p>
           </div>
 
-          <div className={`${styles.links} ${path.includes('/chat') && styles.selected}`}>
+          {/* <div className={`${styles.links} ${path.includes('/chat') && styles.selected}`}>
             <Link href={'/chat'}>{path.includes('/chat') ? <PiChatDotsDuotone fontSize="1.6rem" /> : <PiChatDotsLight fontSize="1.6rem" />}</Link>
             <p>پیام</p>
-          </div>
+          </div> */}
 
           <div className={`${styles.links} ${path.includes('/cart') && styles.selected}`}>
             <Link href={'/cart'}>
