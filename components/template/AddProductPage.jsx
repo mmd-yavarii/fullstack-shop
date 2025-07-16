@@ -1,8 +1,9 @@
 import { categories } from '@/helper/varables';
 import styles from './AddProductPage.module.css';
 import { useState } from 'react';
+import { BeatLoader } from 'react-spinners';
 
-export default function AddProductPage({ handler }) {
+export default function AddProductPage({ handler, isLoading }) {
   const [imgCounter, setImgCounter] = useState(1);
 
   const [form, setForm] = useState({
@@ -91,7 +92,7 @@ export default function AddProductPage({ handler }) {
       </div>
 
       <button className={styles.add} onClick={() => handler(form)}>
-        افزودن محصول
+        {isLoading ? <BeatLoader size="0.6rem" color="#fff" /> : 'افزودن محصول'}
       </button>
     </>
   );
